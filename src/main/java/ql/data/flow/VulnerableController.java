@@ -35,7 +35,8 @@ public class VulnerableController {
 	}
 
 	@GetMapping("/rangeAnalysis")
-	public String rangeAnalysis(@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
+	public String rangeAnalysis(
+			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
 		int j = 0;
 		for (int i = 0; i < 100; i++) {
 			j += 2;
@@ -66,7 +67,7 @@ public class VulnerableController {
 	@GetMapping("/branchTracking")
 	public String branchTracking(
 			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path, String what) {
-		// flow needs to discover that in this branch, conditional always is true, so
+		// data flow analysis needs to discover that in this branch, conditional always is true, so
 		// vulnerability does not hold
 		if (what == "bla") {
 			return vulnIfFalse(path, what == "bla");
