@@ -19,7 +19,7 @@ public class VulnerableController {
 			return "nothing";
 		}
 	}
-	
+
 	public static String vulnIfFalse(String input, boolean cond) {
 		if (!cond) {
 			return Paths.get(input).toString();
@@ -34,9 +34,13 @@ public class VulnerableController {
 		return vuln(path);
 	}
 
-	@GetMapping("/deadCode")
-	public String deadCode(@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
-		if (true == true) {
+	@GetMapping("/rangeAnalysis")
+	public String rangeAnalysis(@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
+		int j = 0;
+		for (int i = 0; i < 100; i++) {
+			j += 2;
+		}
+		if (j >= 0) {
 			return "dead code";
 		}
 		return vuln(path);
@@ -52,11 +56,19 @@ public class VulnerableController {
 		return vuln(path);
 	}
 
+	@GetMapping("/constant propagation - global")
+	public String constantPropagationGlobal(
+			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
+		boolean b = true;
+		return vulnIfFalse(path, b);
+	}
+
 	@GetMapping("/branchTracking")
 	public String branchTracking(
 			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path, String what) {
-		// flow needs to discover that in this branch, conditional always is true, so vulnerability does not hold
-		if(what == "bla") {
+		// flow needs to discover that in this branch, conditional always is true, so
+		// vulnerability does not hold
+		if (what == "bla") {
 			return vulnIfFalse(path, what == "bla");
 		}
 		return "nothing";
