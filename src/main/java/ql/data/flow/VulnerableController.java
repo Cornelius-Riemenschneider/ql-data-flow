@@ -46,7 +46,7 @@ public class VulnerableController {
 		for (int i = 0; i < 100; i++) {
 			j += 2;
 		}
-		if (j >= 0) {
+		if (j == 200) {
 			return "dead code";
 		} else {
 			return vuln(path);
