@@ -21,7 +21,7 @@ public class VulnerableController2 {
 	public String constantPropagationGlobal(
 			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
 		// requires constant propagation across procedures to avoid false positive
-		return vulnIfTrue(path, true);
+		return vulnIfTrue(path, false);
 	}
 
 }
