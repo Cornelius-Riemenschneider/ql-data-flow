@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class VulnerableController2 {
+public class VulnerableController3 {
 	public static String vulnIfTrue(String input, boolean cond) {
 		if (cond) {
 			return Paths.get(input).toString();
@@ -21,7 +21,8 @@ public class VulnerableController2 {
 	public String constantPropagationGlobal(
 			@RequestParam(name = "name", required = false, defaultValue = "/etc/passwd") String path) {
 		// requires constant propagation across procedures to avoid false positive
-		return vulnIfTrue(path, true);
+		boolean b = false;
+		return vulnIfTrue(path, b);
 	}
 
 }
